@@ -13,6 +13,9 @@ function App() {
     <div className="App">
       <Container>
         <Row>
+          <Col xs="12">
+            <h1>Registro de mentores Kodemia</h1>
+          </Col>
           <Col xs="12" md="6">
             <MentorForm />
           </Col>
