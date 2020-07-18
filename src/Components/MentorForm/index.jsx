@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-//import firebase from '../../Services/firebase'
+
+/*importamos firebase*/
+import firebase from '../../Services/firebase'
 
 import { Button, Form, FormGroup, Label, Input, FormText, Container, Row, Col } from 'reactstrap';
 
@@ -47,7 +49,12 @@ class MentorForm extends Component{
 
     componentDidMount(){
         console.log("hola koders")
-        fetch('https://react-vercel.firebaseio.com/.json').then(
+        /*Creamos y ponemos en escucha una referencia a la base de datos*/
+        const mentorsRef = firebase.database().ref('/mentors')
+        mentorsRef.on('value', snapshot => {
+            console.log('snapshot', snapshot.val())
+        }) 
+        /*fetch('https://react-vercel.firebaseio.com/.json').then(
             response => {
                 response.json().then(
                     json => {
@@ -55,7 +62,7 @@ class MentorForm extends Component{
                     }
                 )
             }
-        )
+        )*/
     }
 
     render(){

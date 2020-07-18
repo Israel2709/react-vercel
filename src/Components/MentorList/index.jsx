@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-//import firebase from '../../Services/firebase'
+import firebase from '../../Services/firebase'
 
 import { Button, Form, FormGroup, Label, Input, FormText, Container, Row, Col, Table} from 'reactstrap';
 
@@ -13,16 +13,11 @@ class MentorList extends Component{
 
     componentDidMount(){
         console.log("hola koders")
-        fetch('https://react-vercel.firebaseio.com/mentors.json').then(
-            response => {
-                response.json().then(
-                    json => {
-                        console.log(json)
-                        this.setState( { mentorsList : json })
-                    }
-                )
-            }
-        )
+        const mentorsRef = firebase.database().ref('/mentors')
+        mentorsRef.on('value', snapshot => {
+            console.log('snapshot', snapshot.val())
+            this.setState({mentorsList:snapshot.val()})
+        }) 
     }
 
     render(){
